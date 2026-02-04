@@ -1,0 +1,40 @@
+{
+  "Environments": {
+    "Development": {
+      "ServerIP": "",
+      "SqlCredentials": {
+        "Username": "",
+        "Password": ""
+      },
+      "NetworkCredentials": {
+        "Username": "",
+        "Password": "",
+        "Domain": ""
+      }
+    },
+    "Testing": {
+      "ServerIP": "",
+      "SqlCredentials": {
+        "Username": "",
+        "Password": ""
+      },
+      "NetworkCredentials": {
+        "Username": "",
+        "Password": "",
+        "Domain": ""
+      }
+    },
+    "Production": {
+      "ServerIP": "",
+      "SqlCredentials": {
+        "Username": "",
+        "Password": ""
+      },
+      "NetworkCredentials": {
+        "Username": "",
+        "Password": "",
+        "Domain": ""
+      }
+    }
+  }
+}
