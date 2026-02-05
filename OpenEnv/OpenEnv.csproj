@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<TargetFrameworks>net48;net8;net9</TargetFrameworks>
-		
+
 		<AssemblyName>OpenEnv</AssemblyName>
 		<RootNamespace>OpenEnv</RootNamespace>
 
@@ -19,7 +19,8 @@
 		<PackageIcon>OpenEnv.png</PackageIcon>
 		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>.NET
+		<PackageTags>
+.NET
 .NETFramework
 .NETCore
 Configuration
@@ -34,7 +35,8 @@ Testing
 Production
 EF
 EntityFramework
-SecureConfiguration</PackageTags>
+SecureConfiguration
+		</PackageTags>
 
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<ApplicationIcon>OpenEnv.png</ApplicationIcon>
@@ -42,7 +44,8 @@ SecureConfiguration</PackageTags>
 		<RepositoryUrl>https://github.com/Marradong/OpenEnv</RepositoryUrl>
 		<NeutralLanguage>en-AU</NeutralLanguage>
 		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
-		
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+
 	</PropertyGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
@@ -62,7 +65,11 @@ SecureConfiguration</PackageTags>
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Include="..\LICENSE" Link="LICENSE">
+		  <Pack>True</Pack>
+		  <PackagePath>\</PackagePath>
+		</None>
 		<None Include="OpenEnv.png" Pack="true" PackagePath="\" CopyToOutputDirectory="Always" />
-	  <None Include="..\README.md" Link="README.md" />
+		<None Include="..\README.md" Link="README.md" />
 	</ItemGroup>
 </Project>
