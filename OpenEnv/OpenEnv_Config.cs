@@ -38,8 +38,23 @@ namespace OpenEnv
             lock (_lock)
             {
                 if (_initialised) throw new InvalidOperationException("EnvironmentConfig is already initialised.");
-                var json = File.ReadAllText(jsonFilePath);
-                LoadFromJson(json);
+                try
+                {
+                    string json = File.ReadAllText(jsonFilePath);
+                    LoadFromJson(json);
+                }
+                catch (FileNotFoundException ex)
+                {
+                    throw new InvalidOperationException($"Could not FIND .json Config file at {jsonFilePath}: {ex.Message}");
+                }
+                catch (UnauthorizedAccessException ex)
+                {
+                    throw new InvalidOperationException($"Could not ACCESS .json Config file at {jsonFilePath}: {ex.Message}");
+                }
+                catch (IOException ex)
+                {
+                    throw new InvalidOperationException($"IO Error with .json Config file at {jsonFilePath}: {ex.Message}");
+                }
             }
         }
 
@@ -59,10 +74,21 @@ namespace OpenEnv
 
         private static void LoadFromJson(string json)
         {
-            var config = JsonConvert.DeserializeObject<AppConfig>(json);
-            if (config == null) throw new InvalidOperationException("EnvironmentConfig is invalid. Please ensure json is in a valid format.");
-            _config = config;
-            _initialised = true;
+            try
+            {
+                var config = JsonConvert.DeserializeObject<AppConfig>(json);
+                if (config == null) throw new InvalidOperationException("EnvironmentConfig is invalid. Please ensure json is in a valid format.");
+                _config = config;
+                _initialised = true;
+            }
+            catch (JsonReaderException ex)
+            {
+                throw new InvalidOperationException($"Invalid JSON Config format: {ex.Message}");
+            }
+            catch (JsonSerializationException ex)
+            {
+                Console.WriteLine($"JSON deserialization error: {ex.Message}");
+            }
         }
 
         public static EnvironmentConfig GetEnvironmentConfig(string key)

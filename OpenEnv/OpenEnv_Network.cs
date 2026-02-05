@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Sockets;
+using OpenEnv.Configuration;
 
 namespace OpenEnv
 {
@@ -25,7 +27,25 @@ namespace OpenEnv
                     break;
             }
 
-            return IPAddress.Parse(GetEnvironmentConfig(key).ServerIP);
+            EnvironmentConfig cg = null;
+
+            try
+            {
+                cg = GetEnvironmentConfig(key);
+                IPAddress ipAddress = IPAddress.Parse(cg.ServerIP);
+                return ipAddress;
+            }
+            catch (FormatException ex)
+            {
+                if (cg == null)
+                {
+                    throw new KeyNotFoundException($"{key} environment configuration not found.");
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Invalid IP address format in configuration for key '{key}': '{cg.ServerIP}'. Exception: {ex.Message}");
+                }
+            }
         }
 
         public static IPAddress GetUiIP()
@@ -47,7 +67,25 @@ namespace OpenEnv
                     break;
             }
 
-            return IPAddress.Parse(GetEnvironmentConfig(key).ServerIP);
+            EnvironmentConfig cg = null;
+
+            try
+            {
+                cg = GetEnvironmentConfig(key);
+                IPAddress ipAddress = IPAddress.Parse(cg.ServerIP);
+                return ipAddress;
+            }
+            catch (FormatException ex)
+            {
+                if (cg == null)
+                {
+                    throw new KeyNotFoundException($"{key} environment configuration not found.");
+                }
+                else
+                {
+                    throw new InvalidOperationException($"Invalid IP address format in configuration for key '{key}': '{cg.ServerIP}'. Exception: {ex.Message}");
+                }
+            }
         }
 
         public static bool IsPortAvailable(int port, bool api=true)
