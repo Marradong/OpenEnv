@@ -1,5 +1,4 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
 	<PropertyGroup>
 		<TargetFrameworks>net48;net8;net9</TargetFrameworks>
 		
@@ -7,39 +6,44 @@
 		<RootNamespace>OpenEnv</RootNamespace>
 
 		<Title>OpenEnv</Title>
-		<Version>26.2.3</Version>
-		<Authors>David V, Ethan B</Authors>
+		<Version>26.2.5</Version>
+		<Authors>Ethan B, David V</Authors>
 
-		<Description>
-			Manage development, testing, and production environments for your applications
-		</Description>
+		<Description>OpenEnv is a lightweight library for managing development, testing, and production environments across .NET applications.</Description>
 
 		<IsPackable>true</IsPackable>
-
 		<PackageReleaseNotes>
-
+26.2.5 - Initial Publish to NuGet.org
 		</PackageReleaseNotes>
 
-		<!--
-		<PackageIcon>iconH.png</PackageIcon>
-		<PackageReadmeFile>readme.md</PackageReadmeFile>
-		<RepositoryUrl</RepositoryUrl>
+		<PackageIcon>OpenEnv.png</PackageIcon>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
 		<RepositoryType>git</RepositoryType>
-		<PackageTags>Manage development, testing, and production environments for your applications</PackageTags>
+		<PackageTags>.NET
+.NETFramework
+.NETCore
+Configuration
+Environment
+EnvironmentManagement
+DevOps
+Deployment
+ConnectionStrings
+AppSettings
+Development
+Testing
+Production
+EF
+EntityFramework
+SecureConfiguration</PackageTags>
 
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<ApplicationIcon>iconH.ico</ApplicationIcon>
-		<PackageProjectUrl></PackageProjectUrl>
-		-->
+		<ApplicationIcon>OpenEnv.png</ApplicationIcon>
+		<PackageProjectUrl>https://github.com/Marradong/OpenEnv</PackageProjectUrl>
+		<RepositoryUrl>https://github.com/Marradong/OpenEnv</RepositoryUrl>
+		<NeutralLanguage>en-AU</NeutralLanguage>
+		<PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+		
 	</PropertyGroup>
-
-
-	<!--
-	<ItemGroup>
-		<None Include="iconH.png" Pack="true" PackagePath="\" CopyToOutputDirectory="Always" />
-		<None Include="readme.md" Pack="True" PackagePath="\" />
-	</ItemGroup>
-	-->
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
 		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
@@ -57,4 +61,8 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<None Include="OpenEnv.png" Pack="true" PackagePath="\" CopyToOutputDirectory="Always" />
+	  <None Include="..\README.md" Link="README.md" />
+	</ItemGroup>
 </Project>
