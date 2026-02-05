@@ -1,5 +1,11 @@
 # OpenEnv
 
+<div align="center">
+  <img width="512" height="512" alt="OpenEnv Icon" src="https://github.com/user-attachments/assets/b06eeaa8-2916-4af6-8bf0-cd1ca6eb4157" />
+</div>
+
+---
+
 **OpenEnv** is a lightweight library for managing **development**, **testing**, and **production** environments across .NET applications.
 
 It centralises environment-specific configuration (server IPs, credentials, backups, etc.) and applies them at application startup—removing the need to hard-code or manually swap settings between builds.
