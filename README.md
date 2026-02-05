@@ -15,7 +15,7 @@ It centralises environment-specific configuration (server IPs, credentials, back
 ## Features
 
 - Single configuration file for all environments
-- Supports **.NET Framework 4.8** and **.NET (Core / 6 / 7 / 8+)**
+- Supports **.NET Framework 4.8** and **.NET (Core / 8 / 9+)**
 - Automatically updates connection strings at runtime
 - Works with EF / EF Visual Editor
 - Keeps sensitive environment data out of source code
