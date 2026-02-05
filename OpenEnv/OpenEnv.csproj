@@ -1,0 +1,60 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net48;net8;net9</TargetFrameworks>
+		
+		<AssemblyName>OpenEnv</AssemblyName>
+		<RootNamespace>OpenEnv</RootNamespace>
+
+		<Title>OpenEnv</Title>
+		<Version>26.2.3</Version>
+		<Authors>David V, Ethan B</Authors>
+
+		<Description>
+			Manage development, testing, and production environments for your applications
+		</Description>
+
+		<IsPackable>true</IsPackable>
+
+		<PackageReleaseNotes>
+
+		</PackageReleaseNotes>
+
+		<!--
+		<PackageIcon>iconH.png</PackageIcon>
+		<PackageReadmeFile>readme.md</PackageReadmeFile>
+		<RepositoryUrl</RepositoryUrl>
+		<RepositoryType>git</RepositoryType>
+		<PackageTags>Manage development, testing, and production environments for your applications</PackageTags>
+
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<ApplicationIcon>iconH.ico</ApplicationIcon>
+		<PackageProjectUrl></PackageProjectUrl>
+		-->
+	</PropertyGroup>
+
+
+	<!--
+	<ItemGroup>
+		<None Include="iconH.png" Pack="true" PackagePath="\" CopyToOutputDirectory="Always" />
+		<None Include="readme.md" Pack="True" PackagePath="\" />
+	</ItemGroup>
+	-->
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
+		<Reference Include="System.Configuration" />
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net8' Or '$(TargetFramework)' == 'net9'">
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+		<PackageReference Include="Microsoft.Data.SqlClient" Version="6.1.4" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.2" />
+		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+	</ItemGroup>
+
+</Project>

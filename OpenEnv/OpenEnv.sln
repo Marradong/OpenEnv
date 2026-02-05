@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpenEnv", "OpenEnv.csproj", "{9424B0C1-244E-4D38-B797-F953294042CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9424B0C1-244E-4D38-B797-F953294042CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9424B0C1-244E-4D38-B797-F953294042CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9424B0C1-244E-4D38-B797-F953294042CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9424B0C1-244E-4D38-B797-F953294042CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2B578BB0-B5B2-4C49-B81C-A810B4CE33D6}
+	EndGlobalSection
+EndGlobal

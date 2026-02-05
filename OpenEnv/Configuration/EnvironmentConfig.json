@@ -10,7 +10,8 @@
         "Username": "",
         "Password": "",
         "Domain": ""
-      }
+      },
+      "BackupLocation":  ""
     },
     "Testing": {
       "ServerIP": "",
@@ -22,7 +23,8 @@
         "Username": "",
         "Password": "",
         "Domain": ""
-      }
+      },
+      "BackupLocation": ""
     },
     "Production": {
       "ServerIP": "",
@@ -34,7 +36,8 @@
         "Username": "",
         "Password": "",
         "Domain": ""
-      }
+      },
+      "BackupLocation": ""
     }
   }
 }
