@@ -39,7 +39,7 @@ SecureConfiguration
 		</PackageTags>
 
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-		<ApplicationIcon>OpenEnv.png</ApplicationIcon>
+		<ApplicationIcon>OpenEnv.ico</ApplicationIcon>
 		<PackageProjectUrl>https://github.com/Marradong/OpenEnv</PackageProjectUrl>
 		<RepositoryUrl>https://github.com/Marradong/OpenEnv</RepositoryUrl>
 		<NeutralLanguage>en-AU</NeutralLanguage>
@@ -70,6 +70,10 @@ SecureConfiguration
 		  <PackagePath>\</PackagePath>
 		</None>
 		<None Include="OpenEnv.png" Pack="true" PackagePath="\" CopyToOutputDirectory="Always" />
-		<None Include="..\README.md" Link="README.md" />
+		<None Include="OpenEnv.ico" Pack="true" PackagePath="\" CopyToOutputDirectory="Always" />
+		<None Include="..\README.md" Link="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
 	</ItemGroup>
 </Project>
