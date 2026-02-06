@@ -32,6 +32,10 @@ Install-Package OpenEnv
 
 ---
 
+## Configuration: `Production Server`
+
+To properly utilise OpenEnv, you need to add a blank `PRODUCTION.ini` to the `C:\` drive of your production server. This file acts as a marker to identify the production environment.
+
 ## Configuration: `EnvironmentConfig.json`
 
 Add an `EnvironmentConfig.json` file to your project containing the configuration for each environment.
