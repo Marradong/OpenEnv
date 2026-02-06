@@ -87,7 +87,7 @@ namespace OpenEnv
             }
             catch (JsonSerializationException ex)
             {
-                Console.WriteLine($"JSON deserialization error: {ex.Message}");
+                throw new InvalidOperationException($"JSON deserialization error: {ex.Message}");
             }
         }
 
