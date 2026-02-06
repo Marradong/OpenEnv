@@ -37,6 +37,8 @@ namespace OpenEnv
 
     public static partial class OpenEnv
     {
+        private static Action<string> _log = null;
+
         private static Deployment _hostingMode;
         public static Deployment HostingMode
         {
@@ -60,11 +62,13 @@ namespace OpenEnv
             }
         }
 
-        private static void InitialiseEnvironment(bool Dev_Ui_Test_Api)
+        private static void InitialiseEnvironment(bool Dev_Ui_Test_Api, Action<string> log)
         {
             CultureInfo australiaCulture = new CultureInfo("en-AU");
             Thread.CurrentThread.CurrentCulture = australiaCulture;
             Thread.CurrentThread.CurrentUICulture = australiaCulture;
+
+            _log = log;
 
             if (IsClickOnceDeployed())
             {
@@ -104,14 +108,14 @@ namespace OpenEnv
             // Retrieve the enum name (not the numeric value)
             string HostingModeString = Enum.GetName(typeof(Deployment), HostingMode) ?? string.Empty;
 
-            Console.WriteLine();
-            Console.WriteLine($"{new string('#', 10)} HOSTING ENVIRONMENT : {HostingModeString} {new string('#', 10)}");
-            Console.WriteLine($"\tPLATFORM : {Environment.OSVersion.Platform}");
-            Console.WriteLine($"\tWebApi IP [HostingMode : {HostingMode.ToString()}] : {GetApiIP()}");
-            Console.WriteLine($"\tUi IP [HostingMode : {HostingMode.ToString()}] : {GetUiIP()}");
-            Console.WriteLine(GetEnvironmentInfo());
-            Console.WriteLine($"\t{GetAppName()} : Launched {DateTime.Now:ddd dd MMM HH:mm:ss}");
-            Console.WriteLine($"{new string('#', 60)}\n");
+            _log?.Invoke($"\n");
+            _log?.Invoke($"\n{new string('#', 10)} HOSTING ENVIRONMENT : {HostingModeString} {new string('#', 10)}");
+            _log?.Invoke($"\n\tPLATFORM : {Environment.OSVersion.Platform}");
+            _log?.Invoke($"\n\tWebApi IP [HostingMode : {HostingMode.ToString()}] : {GetApiIP()}");
+            _log?.Invoke($"\n\tUi IP [HostingMode : {HostingMode.ToString()}] : {GetUiIP()}");
+            _log?.Invoke($"\n\t{GetEnvironmentInfo()}");
+            _log?.Invoke($"\n\t{GetAppName()} : Launched {DateTime.Now:ddd dd MMM HH:mm:ss}");
+            _log?.Invoke($"\n{new string('#', 60)}\n");
         }
 
         /// <summary>
@@ -119,10 +123,10 @@ namespace OpenEnv
         /// </summary>
         /// <param name="jsonPath">Path to .json Config file</param>
         /// <param name="Dev_Ui_Test_Api">Indicates whether to use the Test Web API for UI development</param>
-        public static void Initialise(string jsonPath, bool Dev_Ui_Test_Api = false)
+        public static void Initialise(string jsonPath, bool Dev_Ui_Test_Api = false, Action<string> log = null)
         {
             InitialiseConfig(jsonPath);
-            InitialiseEnvironment(Dev_Ui_Test_Api);
+            InitialiseEnvironment(Dev_Ui_Test_Api, log);
         }
 
         /// <summary>
@@ -130,10 +134,10 @@ namespace OpenEnv
         /// </summary>
         /// <param name="json">json string containing the environment variables configuration</param>
         /// <param name="Dev_Ui_Test_Api">Indicates whether to use the Test Web API for UI development</param>
-        public static void InitialiseFromJson(string json, bool Dev_Ui_Test_Api = false)
+        public static void InitialiseFromJson(string json, bool Dev_Ui_Test_Api = false, Action<string> log = null)
         {
             InitialiseConfigFromJson(json);
-            InitialiseEnvironment(Dev_Ui_Test_Api);
+            InitialiseEnvironment(Dev_Ui_Test_Api, log);
         }
 
 #if NET8_0_OR_GREATER
@@ -143,7 +147,7 @@ namespace OpenEnv
     /// <param name="builder">The WebApplicationBuilder instance.</param>
     /// <param name="jsonPath">Path to .json Config file</param>
     /// <param name="uiDevUseTestWebApi">Indicates whether to use the Test Web API for UI development</param>
-    public static void Initialise(WebApplicationBuilder builder, string jsonPath, bool uiDevUseTestWebApi = false)
+    public static void Initialise(WebApplicationBuilder builder, string jsonPath, bool uiDevUseTestWebApi = false, Action<string> log = null)
     {
         string kestrelUrl = builder.Configuration["Url"] ?? string.Empty;
 
@@ -153,14 +157,14 @@ namespace OpenEnv
         }
         catch (ArgumentException ex)
         {
-            Debug.WriteLine($"Error Initializing URL: {ex.Message}");
+            _log?.Invoke($"\nError Initializing URL: {ex.Message}");
         }
 
         Runtime_Config.Load_Connections(builder.Configuration.GetSection("ConnectionStrings"));
 
 
             InitialiseConfig(jsonPath);
-            InitialiseEnvironment(uiDevUseTestWebApi);
+            InitialiseEnvironment(uiDevUseTestWebApi, log);
         }
 
         /// <summary>
@@ -169,7 +173,7 @@ namespace OpenEnv
         /// <param name="builder">The WebApplicationBuilder instance.</param>
         /// <param name="json">json string containing the environment variables configuration</param>
         /// <param name="uiDevUseTestWebApi">Indicates whether to use the Test Web API for UI development</param>
-        public static void InitialiseFromJson(WebApplicationBuilder builder, string json, bool uiDevUseTestWebApi = false)
+        public static void InitialiseFromJson(WebApplicationBuilder builder, string json, bool uiDevUseTestWebApi = false, Action<string> log = null)
         {
             string kestrelUrl = builder.Configuration["Url"] ?? string.Empty;
 
@@ -179,14 +183,14 @@ namespace OpenEnv
             }
             catch (ArgumentException ex)
             {
-                Debug.WriteLine($"Error Initializing URL: {ex.Message}");
+                _log?.Invoke($"\nError Initializing URL: {ex.Message}");
             }
 
             Runtime_Config.Load_Connections(builder.Configuration.GetSection("ConnectionStrings"));
 
 
             InitialiseConfigFromJson(json);
-            InitialiseEnvironment(uiDevUseTestWebApi);
+            InitialiseEnvironment(uiDevUseTestWebApi, log);
         }
 #endif
     }

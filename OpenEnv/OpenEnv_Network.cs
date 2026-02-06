@@ -96,12 +96,12 @@ namespace OpenEnv
             {
                 tcpListener = new TcpListener(ip, port);
                 tcpListener.Start();
-                Console.WriteLine($"local {ip} : port {port} is available.");
+                _log?.Invoke($"\nlocal {ip} : port {port} is available.");
                 return true;
             }
             catch (SocketException ex)
             {
-                Console.WriteLine($"local {ip} : port {port} is not available. Exception: {ex.Message}");
+                _log?.Invoke($"\nlocal {ip} : port {port} is not available. Exception: {ex.Message}");
                 return false;
             }
             finally

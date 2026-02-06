@@ -42,34 +42,43 @@ namespace OpenEnv
         public static bool IsProduction()
         {
             string iniFile = @"C:\PRODUCTION.ini";
-            if (File.Exists(iniFile))
+            try
             {
-                return true;
+                return File.Exists(iniFile);
             }
-            return false;
+            catch (UnauthorizedAccessException ex)
+            {
+                _log?.Invoke($"\nAccess denied checking production marker: {ex.Message}");
+                return false;
+            }
+            catch (Exception ex)
+            {
+                _log?.Invoke($"\nError checking production status: {ex.Message}");
+                return false;
+            }
         }
 
         private static string GetEnvironmentInfo() =>
             string.Join(Environment.NewLine, new[]
             {
-            $"\tEnvironment Info:",
-            $"\t\tMachine Name : {Environment.MachineName}",
-            $"\t\tDomain       : {Environment.UserDomainName}",
-            $"\t\tUser         : {Environment.UserName}",
-            $"\t\tOS x64       : {Environment.Is64BitOperatingSystem}",
-            $"\t\tProcess x64  : {Environment.Is64BitProcess}",
-            $"\t\t.NET         : {Environment.Version}",
-            $"\t\tCulture      : {CultureInfo.CurrentCulture.DisplayName} ({CultureInfo.CurrentCulture.Name})",
-            $"\t\tUtc Offset   : {TimeZoneInfo.Local.GetUtcOffset(DateTime.Now)}",
-            $"\t\tTime Zone    : {TimeZoneInfo.Local.StandardName}",
-            $"\t\tAssembly     : {typeof(OpenEnv).Assembly.Location}",
-            $"\t\tCurrent Dir  : {Environment.CurrentDirectory}",
+            $"Environment Info:",
+            $"\tMachine Name : {Environment.MachineName}",
+            $"\tDomain       : {Environment.UserDomainName}",
+            $"\tUser         : {Environment.UserName}",
+            $"\tOS x64       : {Environment.Is64BitOperatingSystem}",
+            $"\tProcess x64  : {Environment.Is64BitProcess}",
+            $"\t.NET         : {Environment.Version}",
+            $"\tCulture      : {CultureInfo.CurrentCulture.DisplayName} ({CultureInfo.CurrentCulture.Name})",
+            $"\tUtc Offset   : {TimeZoneInfo.Local.GetUtcOffset(DateTime.Now)}",
+            $"\tTime Zone    : {TimeZoneInfo.Local.StandardName}",
+            $"\tAssembly     : {typeof(OpenEnv).Assembly.Location}",
+            $"\tCurrent Dir  : {Environment.CurrentDirectory}",
 #if NET8_0_OR_GREATER
-            $"\t\tUtc Now      : {DateTime.UtcNow}",
-            $"\t\tUptime       : {TimeSpan.FromMilliseconds(Environment.TickCount64)}",
-            $"\t\tCPU Count    : {Environment.ProcessorCount}",
-            $"\t\tOS Version   : {Environment.OSVersion} ({RuntimeInformation.OSDescription.Trim()})",
-            $"\t\tProcess      : [PID={Environment.ProcessId}] {Process.GetCurrentProcess()?.MainModule?.FileName}",
+            $"\tUtc Now      : {DateTime.UtcNow}",
+            $"\tUptime       : {TimeSpan.FromMilliseconds(Environment.TickCount64)}",
+            $"\tCPU Count    : {Environment.ProcessorCount}",
+            $"\tOS Version   : {Environment.OSVersion} ({RuntimeInformation.OSDescription.Trim()})",
+            $"\tProcess      : [PID={Environment.ProcessId}] {Process.GetCurrentProcess()?.MainModule?.FileName}",
 #endif
             });
 
@@ -89,7 +98,7 @@ namespace OpenEnv
         {
             // Retrieve the enum name (not the numeric value)
             string hostingModeString = Enum.GetName(typeof(Deployment), HostingMode) ?? string.Empty;
-            Debug.WriteLine($"Enum Name: {hostingModeString}");
+            _log?.Invoke($"\nEnum Name: {hostingModeString}");
 
             // Determine valid connection strings
             string EFDbHeading = "MsSql : ";
@@ -110,7 +119,7 @@ namespace OpenEnv
 #endif
 
 #if NET8_0_OR_GREATER
-        EFDbHeading = "MsSql : " + string.Join(" ", Runtime_Config.ConnectionStrings.Keys.Select(n => GetCurrentDbCatalog(n)));
+        EFDbHeading = "MsSql : " + string.Join(" ", Runtime_Config.ConnectionStrings?.Keys?.Select(n => GetCurrentDbCatalog(n)));
 #endif
 
             if (IsClickOnceDeployed())
@@ -142,7 +151,7 @@ namespace OpenEnv
             }
 
 
-            Debug.WriteLine($"Caption generated: {caption}");
+            _log?.Invoke($"\nCaption generated: {caption}");
 
             return (caption, true);
         }
