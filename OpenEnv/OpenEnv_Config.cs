@@ -11,9 +11,9 @@ namespace OpenEnv
 {
     public static partial class OpenEnv
     {
-        private const string _productionKey = "Production";
-        private const string _testingKey = "Testing";
-        private const string _developmentKey = "Development";
+        public const string ProductionKey = "Production";
+        public const string TestingKey = "Testing";
+        public const string DevelopmentKey = "Development";
 
         private static bool _initialised = false;
         private static readonly object _lock = new object();
@@ -115,15 +115,15 @@ namespace OpenEnv
             switch (HostingMode)
             {
                 case Deployment.Production:
-                    key = _productionKey;
+                    key = ProductionKey;
                     break;
                 case Deployment.Development_Ui_Test_Api:
                 case Deployment.Testing:
-                    key = _testingKey;
+                    key = TestingKey;
                     break;
                 case Deployment.Development:
                 default:
-                    key = _developmentKey;
+                    key = DevelopmentKey;
                     break;
             }
 

@@ -15,15 +15,15 @@ namespace OpenEnv
             switch (HostingMode)
             {
                 case Deployment.Production:
-                    key = _productionKey;
+                    key = ProductionKey;
                     break;
                 case Deployment.Development_Ui_Test_Api:
                 case Deployment.Testing:
-                    key = _testingKey;
+                    key = TestingKey;
                     break;
                 case Deployment.Development:
                 default:
-                    key = _developmentKey;
+                    key = DevelopmentKey;
                     break;
             }
 
@@ -55,15 +55,15 @@ namespace OpenEnv
             switch (HostingMode)
             {
                 case Deployment.Production:
-                    key = _productionKey;
+                    key = ProductionKey;
                     break;
                 case Deployment.Testing:
-                    key = _testingKey;
+                    key = TestingKey;
                     break;
                 case Deployment.Development_Ui_Test_Api:
                 case Deployment.Development:
                 default:
-                    key = _developmentKey;
+                    key = DevelopmentKey;
                     break;
             }
 

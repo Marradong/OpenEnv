@@ -6,7 +6,7 @@
 		<RootNamespace>OpenEnv</RootNamespace>
 
 		<Title>OpenEnv</Title>
-		<Version>26.2.6</Version>
+		<Version>26.2.10</Version>
 		<Authors>Ethan B, David V</Authors>
 
 		<Description>OpenEnv is a lightweight library for managing development, testing, and production environments across .NET applications.</Description>
@@ -15,6 +15,7 @@
 		<PackageReleaseNotes>
 26.2.5 - Initial Publish to NuGet.org
 26.2.6 - Improved Robustness, Included Dynamic Logger on Initialise and Removed DB Operations from Library
+26.6.10 - Expose Environment Keys for GetEnvironmentConfig
 		</PackageReleaseNotes>
 
 		<PackageIcon>OpenEnv.png</PackageIcon>
