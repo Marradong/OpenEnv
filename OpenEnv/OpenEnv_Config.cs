@@ -11,9 +11,9 @@ namespace OpenEnv
 {
     public static partial class OpenEnv
     {
-        public const string ProductionKey = "Production";
-        public const string TestingKey = "Testing";
-        public const string DevelopmentKey = "Development";
+        private const string _productionKey = "Production";
+        private const string _testingKey = "Testing";
+        private const string _developmentKey = "Development";
 
         private static bool _initialised = false;
         private static readonly object _lock = new object();
@@ -91,6 +91,29 @@ namespace OpenEnv
             }
         }
 
+        public static string GetEnvironmentKey(Deployment mode)
+        {
+            string envKey = string.Empty;
+
+            switch (mode)
+            {
+                case Deployment.Production:
+                    envKey = OpenEnv._productionKey;
+                    break;
+                case Deployment.Testing:
+                    envKey = OpenEnv._testingKey;
+                    break;
+                case Deployment.Development:
+                    envKey = OpenEnv._developmentKey;
+                    break;
+                default:
+                    envKey = OpenEnv._developmentKey;
+                    break;
+            }
+
+            return envKey;
+        }
+
         public static EnvironmentConfig GetEnvironmentConfig(string key)
         {
             if (!_config.Environments.ContainsKey(key))
@@ -115,15 +138,15 @@ namespace OpenEnv
             switch (HostingMode)
             {
                 case Deployment.Production:
-                    key = ProductionKey;
+                    key = _productionKey;
                     break;
                 case Deployment.Development_Ui_Test_Api:
                 case Deployment.Testing:
-                    key = TestingKey;
+                    key = _testingKey;
                     break;
                 case Deployment.Development:
                 default:
-                    key = DevelopmentKey;
+                    key = _developmentKey;
                     break;
             }
 
