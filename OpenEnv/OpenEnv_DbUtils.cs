@@ -93,6 +93,28 @@ namespace OpenEnv
             return dbName + suffix;
         }
 
+        public static string GetDbCatalogFromMode(string dbName, Deployment mode)
+        {
+            string suffix;
+
+            switch (mode)
+            {
+                case Deployment.Production:
+                    suffix = "_Live";
+                    break;
+                case Deployment.Testing:
+                    suffix = "_Test";
+                    break;
+                case Deployment.Development_Ui_Test_Api:
+                case Deployment.Development:
+                default:
+                    suffix = "_Dev";
+                    break;
+            }
+
+            return dbName + suffix;
+        }
+
 #if NET48
         private static void UpdateConfigurationManagerConnectionString(string name, string connectionString)
         {

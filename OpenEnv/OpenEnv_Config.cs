@@ -126,6 +126,7 @@ namespace OpenEnv
             return new EnvironmentConfig
             {
                 ServerIP = env.ServerIP,
+                BackupLocation = env.BackupLocation,
                 SqlCredentials = env.SqlCredentials,
                 NetworkCredentials = env.NetworkCredentials
             };
@@ -160,6 +161,7 @@ namespace OpenEnv
             return new EnvironmentConfig
             {
                 ServerIP = env.ServerIP,
+                BackupLocation = env.BackupLocation,
                 SqlCredentials = env.SqlCredentials,
                 NetworkCredentials = env.NetworkCredentials
             };

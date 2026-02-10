@@ -6,7 +6,7 @@
 		<RootNamespace>OpenEnv</RootNamespace>
 
 		<Title>OpenEnv</Title>
-		<Version>26.2.10.2</Version>
+		<Version>26.2.10.5</Version>
 		<Authors>Ethan B, David V</Authors>
 
 		<Description>OpenEnv is a lightweight library for managing development, testing, and production environments across .NET applications.</Description>
@@ -15,9 +15,12 @@
 		<PackageReleaseNotes>
 26.2.5 - Initial Publish to NuGet.org.
 26.2.6 - Improved Robustness, Included Dynamic Logger on Initialise and Removed DB Operations from Library.
-26.6.10 - Expose Environment Keys for GetEnvironmentConfig.
-26.6.10.1 - Use GetEnvironmentKey instead of exposing public keys.
-26.6.10.2 - Expose BuildConnectionString.
+26.2.10 - Expose Environment Keys for GetEnvironmentConfig.
+26.2.10.1 - Use GetEnvironmentKey instead of exposing public keys.
+26.2.10.2 - Expose BuildConnectionString.
+26.2.10.3 - Add GetDbCatalogFromMode.
+26.2.10.4 - Include Missing BackupLocation in GetEnvironmentConfig.
+26.2.10.5 - Fixing Deserialisation of Password with intermediate DTO.
 		</PackageReleaseNotes>
 
 		<PackageIcon>OpenEnv.png</PackageIcon>
