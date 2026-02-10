@@ -27,7 +27,7 @@ namespace OpenEnv
             MARS allows multiple queries or commands to be executed simultaneously on the same database connection. Without MARS, only one query or command can be active at a time per connection.
     
          */
-        private static SqlConnectionStringBuilder BuildConnectionString(DBConfig dbConfig, string initialCatalog)
+        public static SqlConnectionStringBuilder BuildConnectionString(DBConfig dbConfig, string initialCatalog)
         {
             var connectionString = $@"Data Source={dbConfig.DataSource};Initial Catalog={initialCatalog};Persist Security Info=True;User ID={dbConfig.Environment.SqlCredentials.Username};Password={dbConfig.Environment.SqlCredentials.Password};MultipleActiveResultSets=true;TrustServerCertificate=true;";
             var connection = new SqlConnectionStringBuilder(connectionString)
