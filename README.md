@@ -106,13 +106,21 @@ static class Program
     static void Main()
     {
         // Initialise using a file path
-        HostingEnvironment.Initialise("Path/To/Your/EnvironmentConfig.json");
+        OpenEnv.OpenEnv.Initialise(
+            "Path/To/Your/EnvironmentConfig.json",
+            Dev_Ui_Test_Api: false,
+            log: Console.Write
+        );
 
         // OR initialise from raw JSON
         var json = File.ReadAllText(
             Path.Combine(AppContext.BaseDirectory, "EnvironmentConfig.json")
         );
-        HostingEnvironment.InitialiseFromJson(json);
+        OpenEnv.OpenEnv.InitialiseFromJson(
+            json,
+            Dev_Ui_Test_Api: false,
+            log: Console.Write
+        );
 
         // Continue application startup
     }
@@ -131,16 +139,23 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Initialise using a file path
-        HostingEnvironment.Initialise(
+        OpenEnv.OpenEnv.Initialise(
             "Path/To/Your/EnvironmentConfig.json",
-            builder
+            builder,
+            Dev_Ui_Test_Api: false,
+            log: Console.Write
         );
 
         // OR initialise from raw JSON
         var json = File.ReadAllText(
             Path.Combine(AppContext.BaseDirectory, "EnvironmentConfig.json")
         );
-        HostingEnvironment.InitialiseFromJson(json, builder);
+        OpenEnv.OpenEnv.InitialiseFromJson(
+            json, 
+            builder,
+            Dev_Ui_Test_Api: false,
+            log: Console.Write
+        );
 
         // Continue application startup
     }
